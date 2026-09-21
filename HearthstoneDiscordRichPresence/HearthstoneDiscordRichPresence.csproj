@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -30,19 +30,28 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  
   <ItemGroup>
-    <Reference Include="DiscordRPC, Version=1.0.95.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DiscordRichPresence.1.0.95\lib\net35\DiscordRPC.dll</HintPath>
+    <!-- Packages pull down clean modern versions natively -->
+    <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Hardcoded user pathways replaced with $(LocalAppData) to pull dynamically from your machine -->
+    <Reference Include="HearthstoneDeckTracker">
+      <HintPath>$(LocalAppData)\HearthstoneDeckTracker\app-1.57.12\Hearthstone Deck Tracker.exe</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="HearthDb, Version=14.0.0.29933, Culture=neutral, PublicKeyToken=null" />
-    <Reference Include="HearthMirror, Version=14.0.0.29933, Culture=neutral, PublicKeyToken=null" />
-    <Reference Include="HearthstoneDeckTracker, Version=1.8.4.3813, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Michal\AppData\Local\HearthstoneDeckTracker\app-1.8.7\HearthstoneDeckTracker.exe</HintPath>
+    <Reference Include="HearthDb">
+      <HintPath>$(LocalAppData)\HearthstoneDeckTracker\app-1.57.12\HearthDb.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="HearthMirror">
+      <HintPath>$(LocalAppData)\HearthstoneDeckTracker\app-1.57.12\HearthMirror.dll</HintPath>
+      <Private>False</Private>
     </Reference>
+    
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,10 +65,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
